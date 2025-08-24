@@ -1,0 +1,52 @@
+# .github/workflows/build-windows-executable.yml
+
+name: Build Windows Executable
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    steps:
+      # 1. Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Sets up Python on the runner
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11' # You can change this to your preferred Python version
+
+      # 3. Installs project dependencies and PyInstaller
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ttkbootstrap pyinstaller
+
+      # 4. Runs PyInstaller to build the executable
+      # --onefile: Creates a single executable file.
+      # --windowed: Prevents a console window from opening when the GUI is run.
+      # --name: Sets the name of the final executable.
+      # --icon: (Optional) You can add an application icon. Create an 'assets' folder and place 'icon.ico' in it.
+      - name: Build executable with PyInstaller
+        run: |
+          pyinstaller --onefile --windowed --name FileJanitor file_janitor.py
+          # IMPORTANT: Replace 'file_janitor.py' with the actual name of your Python file.
+
+      # 5. Uploads the built executable as an artifact
+      - name: Upload executable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: FileJanitor-Windows-Executable
+          # PyInstaller creates the executable inside a 'dist' folder.
+          path: dist/FileJanitor.exe
+

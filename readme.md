@@ -26,7 +26,7 @@ A modern, multi-tool graphical application designed to help you analyze, clean, 
 
 1.  Clone this repository:
     ```bash
-    git clone [https://github.com/your-username/File-Janitor.git](https://github.com/your-username/File-Janitor.git)
+    git clone [https://github.com/CrimsonDevil333333/File-Janitor.git](https://github.com/CrimsonDevil333333/File-Janitor.git)
     cd File-Janitor
     ```
 
