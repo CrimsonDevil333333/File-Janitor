@@ -8,7 +8,6 @@ on:
 jobs:
   tag:
     runs-on: ubuntu-latest
-    
     permissions:
       contents: write
 
@@ -20,9 +19,10 @@ jobs:
         id: create_tag
         run: echo "TAG=v$(date +'%Y.%m.%d.%H%M%S')" >> $GITHUB_ENV
 
+      # This step is now changed to use your PAT
       - name: Push new tag
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
           git tag -a ${{ env.TAG }} -m "Auto-tagged release for ${{ github.sha }}"
-          git push origin ${{ env.TAG }}
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }} ${{ env.TAG }}
