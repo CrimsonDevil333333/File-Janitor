@@ -2,7 +2,9 @@
 
 A modern, multi-tool graphical application designed to help you analyze, clean, and manage your file storage. Built with Python and `ttkbootstrap`, this suite provides a user-friendly interface to tackle common storage management tasks.
 
-*A screenshot of the File Janitor application in action.*
+![Dark Mode](./images/Dark.png)
+
+![Light Mode](./images/Light.png)
 
 ## Features
 
@@ -39,7 +41,6 @@ A modern, multi-tool graphical application designed to help you analyze, clean, 
     ```bash
     python file_janitor.py
     ```
-    *(Note: Rename `file_janitor.py` to the actual name of your Python script file.)*
 
 4.  In the application window, select a tool from the tabs, click the primary button to choose a folder, and let the scan run.
 5.  Review the results and use the provided options to manage your files.

@@ -1,12 +1,13 @@
-# .github/workflows/build-windows-executable.yml
-
-name: Build Windows Executable
+name: Build and Release Windows Executable
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push events but only for the "main" branch
+  # Triggers the workflow on push events but only for tags (e.g., v1.0, v2.0)
   push:
-    branches: [ "main" ]
+    tags:
+      - 'v*.*.*' # This pattern matches versions like v1.0.0
+      - 'v*.*'   # This pattern matches versions like v1.0
+  
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -24,7 +25,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11' # You can change this to your preferred Python version
+          python-version: '3.11'
 
       # 3. Installs project dependencies and PyInstaller
       - name: Install dependencies
@@ -32,21 +33,24 @@ jobs:
           python -m pip install --upgrade pip
           pip install ttkbootstrap pyinstaller
 
-      # 4. Runs PyInstaller to build the executable
-      # --onefile: Creates a single executable file.
-      # --windowed: Prevents a console window from opening when the GUI is run.
-      # --name: Sets the name of the final executable.
-      # --icon: (Optional) You can add an application icon. Create an 'assets' folder and place 'icon.ico' in it.
+      # 4. Build executable with PyInstaller
       - name: Build executable with PyInstaller
         run: |
           pyinstaller --onefile --windowed --name FileJanitor file_janitor.py
-          # IMPORTANT: Replace 'file_janitor.py' with the actual name of your Python file.
+          # IMPORTANT: Replace 'file_janitor.py' with the actual name of your Python script.
 
-      # 5. Uploads the built executable as an artifact
+      # 5. (Optional) Upload executable as a workflow artifact
+      # This is useful for testing before creating the release
       - name: Upload executable artifact
         uses: actions/upload-artifact@v4
         with:
           name: FileJanitor-Windows-Executable
-          # PyInstaller creates the executable inside a 'dist' folder.
           path: dist/FileJanitor.exe
 
+      # 6. Create a GitHub Release and upload the executable
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: dist/FileJanitor.exe # Path to the executable to upload
