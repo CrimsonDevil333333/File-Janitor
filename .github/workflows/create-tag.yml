@@ -1,6 +1,5 @@
 name: Create Tag on Push to Main
 
-# This workflow runs on every push to the main branch
 on:
   push:
     branches:
@@ -9,18 +8,18 @@ on:
 jobs:
   tag:
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+
     steps:
-      # 1. Check out the repository to access its content
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Generate a tag based on the current date and time (UTC)
       - name: Create tag
         id: create_tag
         run: echo "TAG=v$(date +'%Y.%m.%d.%H%M%S')" >> $GITHUB_ENV
 
-      # 3. Push the new tag to the repository
-      # This push will trigger your original 'Build and Release' workflow
       - name: Push new tag
         run: |
           git config user.name "${{ github.actor }}"
