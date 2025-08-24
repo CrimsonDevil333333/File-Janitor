@@ -12,22 +12,17 @@ jobs:
       contents: write
 
     steps:
-      # Use the PAT to check out the repository. This is the key change.
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GH_PAT }}
 
       - name: Create tag
         id: create_tag
         run: echo "TAG=v$(date +'%Y.%m.%d.%H%M%S')" >> $GITHUB_ENV
 
+      # This step is now changed to use your PAT
       - name: Push new tag
         run: |
-          # Configure git user for the commit
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
-          
-          # Create and push the tag (no need for PAT in the URL now that checkout is using it)
           git tag -a ${{ env.TAG }} -m "Auto-tagged release for ${{ github.sha }}"
-          git push origin ${{ env.TAG }}
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }} ${{ env.TAG }}
