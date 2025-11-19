@@ -1,25 +1,25 @@
 # File Janitor 🧹
 
-A modern, multi-tool graphical application designed to help you analyze, clean, and manage your file storage. Built with Python and `ttkbootstrap`, this suite provides a user-friendly interface to tackle common storage management tasks.
-
-![Dark Mode](./images/Dark.png)
-
-![Light Mode](./images/Light.png)
+A modern, multi-tool graphical application designed to help you analyze, clean, and manage your file storage. Built with Python and `ttkbootstrap`, this suite provides a user-friendly sidebar interface to tackle common storage management tasks.
 
 ## Features
 
-* **Duplicate File Finder**: Scans directories to find and manage files with identical content using a two-phase check (size then hash). Features multi-select and a "Smart Select" option for easy cleanup.
-* **Large File Finder**: Quickly locates files that exceed a user-specified size, helping you identify the biggest storage hogs.
-* **File Type Analyzer**: Provides a summary of disk space usage broken down by file extension, showing what's taking up your space.
-* **Empty Folder Cleaner**: Recursively finds and deletes empty subdirectories to reduce clutter.
-* **Modern GUI**: A clean, tabbed interface with toggleable Light/Dark themes.
-* **Safe & Responsive**: Operations run in a background thread to keep the UI responsive, with a cancel button available.
-* **Export & Save**: Export scan results to a `.csv` file and have your window settings saved for the next session.
+*   **Dashboard**: Quick overview of file counts and storage usage for a selected folder.
+*   **Duplicate File Finder**: Scans directories to find and manage files with identical content. Features "Smart Select" for easy cleanup.
+*   **Large File Finder**: Quickly locates files that exceed a user-specified size.
+*   **Old File Finder**: Identifies files that haven't been modified in a long time (e.g., > 6 months).
+*   **Temp File Cleaner**: Scans for and removes common temporary and junk files.
+*   **File Organizer**: Automatically sorts files into subfolders based on type (Images, Documents, Audio, etc.).
+*   **Batch Renamer**: Rename multiple files at once using customizable patterns.
+*   **File Type Analyzer**: Provides a summary of disk space usage broken down by file extension.
+*   **Empty Folder Cleaner**: Recursively finds and deletes empty subdirectories.
+*   **Modern GUI**: A clean, sidebar-based interface with toggleable Light/Dark themes.
+*   **Safe & Responsive**: Operations run in a background thread to keep the UI responsive.
 
 ## Requirements
 
-* Python 3.7+
-* ttkbootstrap
+*   Python 3.7+
+*   ttkbootstrap
     ```bash
     pip install ttkbootstrap
     ```
@@ -28,7 +28,7 @@ A modern, multi-tool graphical application designed to help you analyze, clean, 
 
 1.  Clone this repository:
     ```bash
-    git clone [https://github.com/CrimsonDevil333333/File-Janitor.git](https://github.com/CrimsonDevil333333/File-Janitor.git)
+    git clone https://github.com/CrimsonDevil333333/File-Janitor.git
     cd File-Janitor
     ```
 
@@ -42,9 +42,8 @@ A modern, multi-tool graphical application designed to help you analyze, clean, 
     python file_janitor.py
     ```
 
-4.  In the application window, select a tool from the tabs, click the primary button to choose a folder, and let the scan run.
-5.  Review the results and use the provided options to manage your files.
-
+4.  Use the **Sidebar** to navigate between different tools.
+5.  Select a folder and run the desired scan or operation.
 
 ## License
 

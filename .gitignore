@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+env/
+venv/
+.env
+.venv
+
+# IDEs
+.vscode/
+.idea/
+
+# Project Specific
+file_janitor_settings.json
+*.log
